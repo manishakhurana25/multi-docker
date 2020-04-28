@@ -12,10 +12,10 @@ services:
       - client
     restart: always
     build:
-      context: ./nginx
       dockerfile: Dockerfile.dev
+      context: ./nginx
     ports:
-      - '3090:80'
+      - '3050:80'
   api:
     depends_on:
         - postgres
@@ -39,8 +39,9 @@ services:
       - api
     stdin_open: true
     build:
-      context: ./client
+
       dockerfile: Dockerfile.dev
+      context: ./client
     #volumes:
     #  - /app/node_modules
     #  - ./client:/app
@@ -51,8 +52,8 @@ services:
         - REDIS_HOST=redis
         - REDIS_PORT=6379
     build:
-      context: ./worker
       dockerfile: Dockerfile.dev
+      context: ./worker
     #volumes:
     #  - /app/node_modules
     #  - ./worker:/app
